@@ -1,187 +1,72 @@
-# Kimi Coding Plan 余量查询工具
+# KimiQuota
 
-一套完整的工具，用于查看 Kimi Code CLI 的使用量余量。包含命令行脚本和 macOS 菜单栏应用。
+🌙 查看 Kimi Coding Plan 余量的 macOS 菜单栏应用
 
----
+[![GitHub](https://img.shields.io/github/license/Dominic789654/KimiQuota)](https://github.com/Dominic789654/KimiQuota/blob/main/LICENSE)
+[![Platform](https://img.shields.io/badge/platform-macOS%2014%2B-blue)](https://github.com/Dominic789654/KimiQuota)
+[![Homebrew](https://img.shields.io/badge/Homebrew-tap-orange)](https://github.com/Dominic789654/homebrew-kimiquota)
 
-## 📦 包含内容
+![Menu Bar](https://img.shields.io/badge/menu%20bar-🟢%2083-green)
 
-```
-coding-plan-checker/
-├── kimi_quota.py                  # 命令行版本
-├── KimiQuotaMenuBar.app/          # macOS 菜单栏应用
-│   └── Contents/MacOS/
-│       └── kimi_menu.py
-├── homebrew-tap/                  # Homebrew 支持
-│   ├── Formula/kimiquota.rb
-│   └── README.md
-├── install.sh                     # 一键安装脚本
-├── install-brew.sh                # Homebrew 风格安装 ⭐
-├── run.sh                         # 快速启动脚本
-├── setup.py                       # 打包脚本
-└── README.md                      # 本文档
-```
+[English](#english) | [中文](#中文)
 
 ---
 
-## 🚀 快速开始
+## 中文
 
-### 方式一: Homebrew 安装 (推荐 ⭐⭐⭐)
+一套完整的工具，用于查看 Kimi Code CLI 的使用量余量。
+
+### 功能特点
+
+| 功能 | 描述 |
+|------|------|
+| 🟢🟡🔴 状态指示 | 根据余量显示颜色（绿≥50%，黄≥20%，红<20%） |
+| 📊 实时显示 | 菜单栏直接显示剩余额度 |
+| ⏰ 自动刷新 | 每 5 分钟自动更新 |
+| 🔄 手动刷新 | 点击菜单立即刷新 |
+| 📝 详细菜单 | 显示状态、已用、重置时间等 |
+| 🌙 快速打开 | 一键打开 Kimi 网站 |
+
+### 安装
+
+#### 方式一: Homebrew (推荐 ⭐⭐⭐)
+
+```bash
+# 添加 tap
+brew tap Dominic789654/kimiquota
+
+# 安装菜单栏应用
+brew install --cask kimiquota
+
+# 或仅安装命令行工具
+brew install Dominic789654/kimiquota/kimiquota
+```
+
+#### 方式二: 手动安装
 
 ```bash
 # 克隆仓库
-git clone <repository-url>
-cd coding-plan-checker
+git clone https://github.com/Dominic789654/KimiQuota.git
+cd KimiQuota
 
-# 一键安装 (Homebrew 风格)
-./install-brew.sh
-```
-
-安装完成后，你将获得:
-- `kimiquota` - 启动菜单栏应用
-- `kimiquota-cli` - 命令行工具
-- `/Applications/KimiQuota.app` - 独立应用
-
-### 方式二: 手动安装
-
-```bash
 # 安装依赖
 pip install requests rumps
 
-# 启动菜单栏应用
+# 启动
 ./run.sh
 ```
 
----
+### 使用
 
-## 🍺 Homebrew 风格安装详解
-
-### 使用 `install-brew.sh` 脚本
+#### 菜单栏应用
 
 ```bash
-./install-brew.sh
+kimiquota        # 启动菜单栏应用
 ```
 
-此脚本会:
-1. ✅ 检查 Homebrew 和 Python 环境
-2. ✅ 创建隔离的 Python 虚拟环境
-3. ✅ 安装所有依赖 (rumps, requests)
-4. ✅ 创建 `kimiquota` 和 `kimiquota-cli` 命令
-5. ✅ 创建 `/Applications/KimiQuota.app`
+菜单栏会显示: `🟢 83`
 
-### 安装后的使用
-
-```bash
-# 启动菜单栏应用
-kimiquota
-
-# 或使用应用
-open /Applications/KimiQuota.app
-
-# 命令行工具
-kimiquota-cli
-kimiquota-cli --json
-```
-
-### 卸载
-
-```bash
-rm -rf $(brew --prefix)/opt/kimiquota
-rm $(brew --prefix)/bin/kimiquota
-rm $(brew --prefix)/bin/kimiquota-cli
-rm -rf /Applications/KimiQuota.app
-```
-
----
-
-## 🍎 macOS 菜单栏应用
-
-### 快速启动
-
-```bash
-# 方式一: 使用启动脚本 (开发/测试)
-./run.sh
-
-# 方式二: 直接运行
-python KimiQuotaMenuBar.app/Contents/MacOS/kimi_menu.py
-
-# 方式三: Homebrew 安装后
-kimiquota
-```
-
-### 菜单栏应用功能
-
-| 功能 | 说明 |
-|------|------|
-| 🟢🟡🔴 状态图标 | 根据余量显示不同颜色（绿/黄/红）|
-| 实时显示 | 菜单栏显示当前剩余额度 |
-| 自动刷新 | 每 5 分钟自动更新数据 |
-| 手动刷新 | 点击菜单中的"立即刷新" |
-| 详细菜单 | 点击图标查看详细使用信息 |
-| 重置提醒 | 显示额度重置时间 |
-
-### 菜单栏显示模式
-
-```bash
-# 默认模式：图标 + 数字
-kimiquota
-
-# 仅显示数字（节省空间）
-python KimiQuotaMenuBar.app/Contents/MacOS/kimi_menu.py --hide-icon
-```
-
----
-
-## 💻 命令行版本
-
-### 基本用法
-
-```bash
-# 直接运行
-python kimi_quota.py
-
-# JSON 格式输出
-python kimi_quota.py --json
-
-# 禁用颜色
-python kimi_quota.py --no-color
-
-# Homebrew 安装后
-kimiquota-cli
-kimiquota-cli --json
-```
-
----
-
-## 📋 示例输出
-
-### 命令行版本
-
-```
-============================================================
-                 🌙 Kimi Coding Plan 余量查询                  
-============================================================
-
-📊 Weekly limit:
-  [█████░░░░░░░░░░░░░░░░░░░░░░░░░]
-  已用: 17 / 限额: 100  |  5天3小时后重置
-  剩余: 83 (83.0%)
-
-📋 详细限制:
-
-  • 5h limit:
-      [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]
-      已用: 5 / 限额: 100  |  56分钟后重置
-      剩余: 95 (95.0%)
-
-============================================================
-```
-
-### 菜单栏应用
-
-菜单栏显示: `🟢 83`
-
-点击后菜单内容：
+点击后显示:
 ```
 🟢 状态: 充足
 💚 剩余: 83 / 100
@@ -196,55 +81,138 @@ kimiquota-cli --json
 👋 退出
 ```
 
----
-
-## ⚙️ 设置开机启动
-
-### Homebrew 安装版本
+#### 命令行工具
 
 ```bash
-# 方式1: 系统设置
-# 系统设置 → 通用 → 登录项 → 添加 KimiQuota.app
+kimiquota-cli              # 查看余量
+kimiquota-cli --json       # JSON 格式
+kimiquota-cli --no-color   # 禁用颜色
+```
 
-# 方式2: 命令行
+### 设置开机启动
+
+```bash
+# Homebrew 安装后，添加到登录项
 osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/KimiQuota.app", hidden:false}'
 ```
 
-### 手动打包版本
-
-1. 打包应用: `python setup.py py2app`
-2. 复制到应用文件夹: `cp -r dist/KimiQuota.app /Applications/`
-3. 打开 **系统设置** → **通用** → **登录项**
-4. 点击 **+** 按钮，选择 `/Applications/KimiQuota.app`
+或手动: 系统设置 → 通用 → 登录项 → 添加 KimiQuota.app
 
 ---
 
-## 🔧 工作原理
+## English
 
-脚本通过以下步骤获取余量信息：
+A complete set of tools to check Kimi Coding Plan quota on macOS.
 
-1. 从 `~/.kimi/credentials/kimi-code.json` 读取 OAuth access token
-2. 调用 Kimi API: `https://api.kimi.com/coding/v1/usages`
-3. 解析并展示返回的数据
+### Features
+
+| Feature | Description |
+|---------|-------------|
+| 🟢🟡🔴 Status Indicator | Color based on quota (Green≥50%, Yellow≥20%, Red<20%) |
+| 📊 Real-time Display | Show remaining quota in menu bar |
+| ⏰ Auto Refresh | Auto update every 5 minutes |
+| 🔄 Manual Refresh | Click menu to refresh instantly |
+| 📝 Detailed Menu | Show status, usage, reset time |
+| 🌙 Quick Open | One-click to open Kimi website |
+
+### Installation
+
+#### Option 1: Homebrew (Recommended ⭐⭐⭐)
+
+```bash
+# Add tap
+brew tap Dominic789654/kimiquota
+
+# Install menu bar app
+brew install --cask kimiquota
+
+# Or install CLI only
+brew install Dominic789654/kimiquota/kimiquota
+```
+
+#### Option 2: Manual Install
+
+```bash
+# Clone repo
+git clone https://github.com/Dominic789654/KimiQuota.git
+cd KimiQuota
+
+# Install dependencies
+pip install requests rumps
+
+# Run
+./run.sh
+```
+
+### Usage
+
+#### Menu Bar App
+
+```bash
+kimiquota        # Start menu bar app
+```
+
+Menu bar shows: `🟢 83`
+
+Click to show:
+```
+🟢 Status: Good
+💚 Remaining: 83 / 100
+📊 Used: 17 (17%)
+⏰ Resets in 5d 3h
+─────────────
+🔄 Refresh Now
+✅ Auto Refresh
+─────────────
+🌙 Open Kimi Code
+─────────────
+👋 Quit
+```
+
+#### CLI Tool
+
+```bash
+kimiquota-cli              # Check quota
+kimiquota-cli --json       # JSON format
+kimiquota-cli --no-color   # Disable colors
+```
+
+### Auto-start on Login
+
+```bash
+# Add to login items
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/KimiQuota.app", hidden:false}'
+```
+
+Or manually: System Settings → General → Login Items → Add KimiQuota.app
 
 ---
 
-## ⚠️ 注意事项
+## 📦 Project Structure
 
-- 需要先通过 `kimi login` 登录，脚本才能获取到有效的 access token
-- 如果 token 过期，需要重新运行 `kimi login`
-- 菜单栏应用需要 Python 3 和 rumps 库
+```
+KimiQuota/
+├── kimi_quota.py                  # CLI version
+├── KimiQuotaMenuBar.app/          # Menu bar app bundle
+│   └── Contents/MacOS/kimi_menu.py
+├── homebrew-tap/                  # Homebrew formula
+├── install.sh                     # Install script
+├── install-brew.sh                # Homebrew-style local install
+├── run.sh                         # Quick start
+└── README.md                      # This file
+```
 
----
+## ⚠️ Requirements
 
-## 📝 依赖
+- macOS 14+ (Sonoma)
+- Python 3.11+
+- `kimi` CLI logged in (`kimi login`)
 
-- Python 3.8+
-- `requests` - HTTP 请求
-- `rumps` - macOS 菜单栏应用框架（仅菜单栏版本需要）
+## 🔗 Related
 
----
+- Homebrew Tap: [Dominic789654/homebrew-kimiquota](https://github.com/Dominic789654/homebrew-kimiquota)
+- Kimi CLI: https://github.com/MoonshotAI/kimi-cli
 
-## 📄 许可证
+## 📄 License
 
-MIT
+MIT License - see [LICENSE](LICENSE) file
