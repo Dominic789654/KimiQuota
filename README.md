@@ -4,7 +4,7 @@
 
 [![GitHub](https://img.shields.io/github/license/Dominic789654/KimiQuota)](https://github.com/Dominic789654/KimiQuota/blob/main/LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS%2014%2B-blue)](https://github.com/Dominic789654/KimiQuota)
-[![Homebrew](https://img.shields.io/badge/Homebrew-tap-orange)](https://github.com/Dominic789654/homebrew-kimiquota)
+[![Swift](https://img.shields.io/badge/Swift-5.9-orange)](https://swift.org)
 
 ![Menu Bar](https://img.shields.io/badge/menu%20bar-🟢%2083-green)
 
@@ -14,9 +14,9 @@
 
 ## 中文
 
-一套完整的工具，用于查看 Kimi Code CLI 的使用量余量。
+用 Swift 重写的原生 macOS 菜单栏应用，用于查看 Kimi Code CLI 的使用量余量。
 
-### 功能特点
+### ✨ 功能特点
 
 | 功能 | 描述 |
 |------|------|
@@ -26,44 +26,46 @@
 | 🔄 手动刷新 | 点击菜单立即刷新 |
 | 📝 详细菜单 | 显示状态、已用、重置时间等 |
 | 🌙 快速打开 | 一键打开 Kimi 网站 |
+| 💾 原生应用 | Swift 编写，真正的 macOS 应用 |
 
-### 安装
+### 📥 安装
 
-#### 方式一: Homebrew (推荐 ⭐⭐⭐)
+#### 方式一: 下载预编译版本 (推荐)
+
+1. 从 [GitHub Releases](https://github.com/Dominic789654/KimiQuota/releases) 下载 `KimiQuota.app.zip`
+2. 解压，将 `KimiQuota.app` 拖到 **应用程序** 文件夹
+3. 双击打开
+
+#### 方式二: Homebrew
 
 ```bash
-# 一步安装菜单栏应用
-brew install --cask Dominic789654/kimiquota/kimiquota
-
-# 或仅安装命令行工具
-brew install Dominic789654/kimiquota/kimiquota
+brew tap Dominic789654/kimiquota
+brew install --cask kimiquota
 ```
 
-#### 方式二: 手动安装
+#### 方式三: 从源码构建
 
 ```bash
-# 克隆仓库
 git clone https://github.com/Dominic789654/KimiQuota.git
 cd KimiQuota
-
-# 安装依赖
-pip install requests rumps
-
-# 启动
-./run.sh
+./build.sh
+# 然后拖拽 KimiQuota.app 到 Applications
 ```
 
-### 使用
+### 🚀 使用
 
-#### 菜单栏应用
-
+**首次使用**: 确保已登录 Kimi CLI
 ```bash
-kimiquota        # 启动菜单栏应用
+kimi login
 ```
 
-菜单栏会显示: `🟢 83`
+启动应用后，你会在菜单栏看到：
 
-点击后显示:
+```
+🟢 83
+```
+
+点击图标显示详细菜单：
 ```
 🟢 状态: 充足
 💚 剩余: 83 / 100
@@ -78,18 +80,9 @@ kimiquota        # 启动菜单栏应用
 👋 退出
 ```
 
-#### 命令行工具
+### ⚙️ 设置开机启动
 
 ```bash
-kimiquota-cli              # 查看余量
-kimiquota-cli --json       # JSON 格式
-kimiquota-cli --no-color   # 禁用颜色
-```
-
-### 设置开机启动
-
-```bash
-# Homebrew 安装后，添加到登录项
 osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/KimiQuota.app", hidden:false}'
 ```
 
@@ -99,9 +92,9 @@ osascript -e 'tell application "System Events" to make login item at end with pr
 
 ## English
 
-A complete set of tools to check Kimi Coding Plan quota on macOS.
+A native macOS menu bar app written in Swift to check Kimi Code CLI usage quota.
 
-### Features
+### ✨ Features
 
 | Feature | Description |
 |---------|-------------|
@@ -111,44 +104,46 @@ A complete set of tools to check Kimi Coding Plan quota on macOS.
 | 🔄 Manual Refresh | Click menu to refresh instantly |
 | 📝 Detailed Menu | Show status, usage, reset time |
 | 🌙 Quick Open | One-click to open Kimi website |
+| 💾 Native App | Written in Swift, true macOS app |
 
-### Installation
+### 📥 Installation
 
-#### Option 1: Homebrew (Recommended ⭐⭐⭐)
+#### Option 1: Download Pre-built (Recommended)
+
+1. Download `KimiQuota.app.zip` from [GitHub Releases](https://github.com/Dominic789654/KimiQuota/releases)
+2. Extract and drag `KimiQuota.app` to **Applications**
+3. Double-click to open
+
+#### Option 2: Homebrew
 
 ```bash
-# One-line install menu bar app
-brew install --cask Dominic789654/kimiquota/kimiquota
-
-# Or CLI only
-brew install Dominic789654/kimiquota/kimiquota
+brew tap Dominic789654/kimiquota
+brew install --cask kimiquota
 ```
 
-#### Option 2: Manual Install
+#### Option 3: Build from Source
 
 ```bash
-# Clone repo
 git clone https://github.com/Dominic789654/KimiQuota.git
 cd KimiQuota
-
-# Install dependencies
-pip install requests rumps
-
-# Run
-./run.sh
+./build.sh
+# Then drag KimiQuota.app to Applications
 ```
 
-### Usage
+### 🚀 Usage
 
-#### Menu Bar App
-
+**First time**: Make sure you've logged in to Kimi CLI
 ```bash
-kimiquota        # Start menu bar app
+kimi login
 ```
 
-Menu bar shows: `🟢 83`
+Once launched, you'll see in the menu bar:
 
-Click to show:
+```
+🟢 83
+```
+
+Click the icon to show the detailed menu:
 ```
 🟢 Status: Good
 💚 Remaining: 83 / 100
@@ -163,18 +158,9 @@ Click to show:
 👋 Quit
 ```
 
-#### CLI Tool
+### ⚙️ Auto-start on Login
 
 ```bash
-kimiquota-cli              # Check quota
-kimiquota-cli --json       # JSON format
-kimiquota-cli --no-color   # Disable colors
-```
-
-### Auto-start on Login
-
-```bash
-# Add to login items
 osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/KimiQuota.app", hidden:false}'
 ```
 
@@ -186,21 +172,38 @@ Or manually: System Settings → General → Login Items → Add KimiQuota.app
 
 ```
 KimiQuota/
-├── kimi_quota.py                  # CLI version
-├── KimiQuotaMenuBar.app/          # Menu bar app bundle
-│   └── Contents/MacOS/kimi_menu.py
-├── homebrew-tap/                  # Homebrew formula
-├── install.sh                     # Install script
-├── install-brew.sh                # Homebrew-style local install
-├── run.sh                         # Quick start
-└── README.md                      # This file
+├── Sources/KimiQuota/
+│   └── main.swift          # Swift source code
+├── Package.swift           # Swift Package Manager
+├── build.sh                # Build script
+├── KimiQuota.app/          # Built app (after running build.sh)
+├── kimi_quota.py           # Legacy Python CLI (optional)
+└── README.md               # This file
 ```
 
-## ⚠️ Requirements
+## 🛠️ Development
+
+### Requirements
 
 - macOS 14+ (Sonoma)
-- Python 3.11+
+- Xcode 15+ or Swift 5.9+
 - `kimi` CLI logged in (`kimi login`)
+
+### Build
+
+```bash
+swift build
+swift build -c release
+./build.sh
+```
+
+### Run
+
+```bash
+swift run
+# or
+open KimiQuota.app
+```
 
 ## 🔗 Related
 

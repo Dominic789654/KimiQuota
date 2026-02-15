@@ -1,0 +1,21 @@
+# Swift
+.build/
+*.xcodeproj
+*.xcworkspace
+xcuserdata/
+DerivedData/
+
+# macOS
+.DS_Store
+
+# App
+KimiQuota.app/
+*.app.zip
+*.dmg
+
+# Python (legacy)
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
