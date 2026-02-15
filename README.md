@@ -32,11 +32,8 @@
 #### 方式一: Homebrew (推荐 ⭐⭐⭐)
 
 ```bash
-# 添加 tap
-brew tap Dominic789654/kimiquota
-
-# 安装菜单栏应用
-brew install --cask kimiquota
+# 一步安装菜单栏应用
+brew install --cask Dominic789654/kimiquota/kimiquota
 
 # 或仅安装命令行工具
 brew install Dominic789654/kimiquota/kimiquota
@@ -120,13 +117,10 @@ A complete set of tools to check Kimi Coding Plan quota on macOS.
 #### Option 1: Homebrew (Recommended ⭐⭐⭐)
 
 ```bash
-# Add tap
-brew tap Dominic789654/kimiquota
+# One-line install menu bar app
+brew install --cask Dominic789654/kimiquota/kimiquota
 
-# Install menu bar app
-brew install --cask kimiquota
-
-# Or install CLI only
+# Or CLI only
 brew install Dominic789654/kimiquota/kimiquota
 ```
 
